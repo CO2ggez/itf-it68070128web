@@ -1,3 +1,4 @@
+// --- ส่วนดึง Element (เหมือนเดิม) ---
 const logOutputDiv = document.getElementById('log-output');
 const proceedBtn = document.getElementById('proceed-btn');
 const changeBalanceBtn = document.getElementById('change-balance-btn');
@@ -5,13 +6,42 @@ const currentAccountBalanceInput = document.getElementById('current-account-bala
 const currentCashBalanceInput = document.getElementById('current-cash-balance');
 const operationTypeSelect = document.getElementById('operation-type');
 const operationAmountInput = document.getElementById('operation-amount');
+const convertBtn = document.getElementById('convert-btn');
+const inputBalance = document.getElementById('input-balance');
+const outputBalance = document.getElementById('output-balance');
+const inputCurrency = document.getElementById('input-currency');
+
 
 let logEntryNumber = 0;
+let isEditMode = false;
+const USD_TO_THB_RATE = 32.5;
 
 function addLog(message) {
     logEntryNumber++;
     logOutputDiv.innerHTML = `${logEntryNumber}. ${message}<br>` + logOutputDiv.innerHTML;
 }
+
+
+changeBalanceBtn.addEventListener('click', function() {
+    isEditMode = !isEditMode; // สลับค่า true/false
+
+    if (isEditMode) {
+
+        currentAccountBalanceInput.readOnly = false;
+        currentCashBalanceInput.readOnly = false;
+        changeBalanceBtn.textContent = 'Save';
+        changeBalanceBtn.style.backgroundColor = '#28a745';
+        addLog("Balance editing enabled.");
+    } else {
+
+        currentAccountBalanceInput.readOnly = true;
+        currentCashBalanceInput.readOnly = true;
+        changeBalanceBtn.textContent = 'Change';
+        changeBalanceBtn.style.backgroundColor = '#007bff';
+        addLog("Balance changes saved.");
+    }
+});
+
 
 proceedBtn.addEventListener('click', function() {
     const type = operationTypeSelect.value;
@@ -46,18 +76,6 @@ proceedBtn.addEventListener('click', function() {
     currentCashBalanceInput.value = cashBalance;
 });
 
-changeBalanceBtn.addEventListener('click', function() {
-    addLog("Change button clicked (logic to be implemented).");
-});
-
-addLog("System initialized. Welcome!");
-
-const convertBtn = document.getElementById('convert-btn');
-const inputBalance = document.getElementById('input-balance');
-const outputBalance = document.getElementById('output-balance');
-const inputCurrency = document.getElementById('input-currency');
-
-const USD_TO_THB_RATE = 32.5;
 
 convertBtn.addEventListener('click', function() {
     const amount = Number(inputBalance.value);
@@ -79,3 +97,5 @@ convertBtn.addEventListener('click', function() {
         addLog(`Converted ${amount} THB to ${result.toFixed(2)} USD.`);
     }
 });
+
+addLog("System initialized. Welcome!");
