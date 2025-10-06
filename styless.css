@@ -1,6 +1,81 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
 nav {
-    background-color: rgb(78, 209, 241);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 16px;
+    background-color: #1665E5;
+    color: white;
+}
+
+.container {
+    margin: 16px 32px;
+}
+
+#my-title {
+    color: rebeccapurple;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#log-output {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 16px;
+    height: 150px;
+    overflow-y: auto;
+    font-family: monospace;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.main-content {
+    display: flex;
+    gap: 32px;
+}
+
+.column {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.info-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-block div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-block input, .info-block select, .info-block button {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.info-block button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+}
+
+.info-block button:hover {
+    background-color: #0056b3;
 }
