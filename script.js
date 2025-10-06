@@ -1,3 +1,4 @@
+// ดึง Element ต่างๆ ที่ต้องใช้มาเก็บในตัวแปร
 const logOutputDiv = document.getElementById('log-output');
 const proceedBtn = document.getElementById('proceed-btn');
 const changeBalanceBtn = document.getElementById('change-balance-btn');
@@ -13,28 +14,42 @@ function addLog(message) {
     logOutputDiv.innerHTML = `${logEntryNumber}. ${message}<br>` + logOutputDiv.innerHTML;
 }
 
+
 proceedBtn.addEventListener('click', function() {
     const type = operationTypeSelect.value;
     const amount = Number(operationAmountInput.value);
-    let currentBalance = Number(currentAccountBalanceInput.value);
+    let accountBalance = Number(currentAccountBalanceInput.value);
+    let cashBalance = Number(currentCashBalanceInput.value);
 
     if (amount <= 0) {
         addLog("Error: Amount must be positive.");
         return;
     }
+
     if (type === 'Withdraw') {
-        if (amount > currentBalance) {
+        if (amount > accountBalance) {
             addLog(`Error: Insufficient balance to withdraw ${amount}.`);
         } else {
-            currentBalance -= amount;
-            addLog(`Successfully withdrew ${amount} from account.`);
+            accountBalance -= amount;
+            cashBalance += amount;
+            addLog(`Successfully withdrew ${amount} from account to cash.`);
         }
     } else if (type === 'Deposit') {
-        currentBalance += amount;
-        addLog(`Successfully deposited ${amount} to account.`);
+
+        if (amount > cashBalance) {
+            addLog(`Error: Insufficient cash to deposit ${amount}.`);
+        } else {
+            cashBalance -= amount;
+            accountBalance += amount;
+            addLog(`Successfully deposited ${amount} from cash to account.`);
+        }
     }
-    currentAccountBalanceInput.value = currentBalance;
+
+
+    currentAccountBalanceInput.value = accountBalance;
+    currentCashBalanceInput.value = cashBalance;
 });
+
 
 changeBalanceBtn.addEventListener('click', function() {
     addLog("Change button clicked (logic to be implemented).");
@@ -42,12 +57,13 @@ changeBalanceBtn.addEventListener('click', function() {
 
 addLog("System initialized. Welcome!");
 
+
+
 const convertBtn = document.getElementById('convert-btn');
 const inputBalance = document.getElementById('input-balance');
 const outputBalance = document.getElementById('output-balance');
 const inputCurrency = document.getElementById('input-currency');
-
-const USD_TO_THB_RATE = 32.5;
+const USD_TO_THB_RATE = 35;
 
 convertBtn.addEventListener('click', function() {
     const amount = Number(inputBalance.value);
