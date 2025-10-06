@@ -1,4 +1,3 @@
-// ดึง Element ต่างๆ ที่ต้องใช้มาเก็บในตัวแปร
 const logOutputDiv = document.getElementById('log-output');
 const proceedBtn = document.getElementById('proceed-btn');
 const changeBalanceBtn = document.getElementById('change-balance-btn');
@@ -13,7 +12,6 @@ function addLog(message) {
     logEntryNumber++;
     logOutputDiv.innerHTML = `${logEntryNumber}. ${message}<br>` + logOutputDiv.innerHTML;
 }
-
 
 proceedBtn.addEventListener('click', function() {
     const type = operationTypeSelect.value;
@@ -35,7 +33,6 @@ proceedBtn.addEventListener('click', function() {
             addLog(`Successfully withdrew ${amount} from account to cash.`);
         }
     } else if (type === 'Deposit') {
-
         if (amount > cashBalance) {
             addLog(`Error: Insufficient cash to deposit ${amount}.`);
         } else {
@@ -45,11 +42,9 @@ proceedBtn.addEventListener('click', function() {
         }
     }
 
-
     currentAccountBalanceInput.value = accountBalance;
     currentCashBalanceInput.value = cashBalance;
 });
-
 
 changeBalanceBtn.addEventListener('click', function() {
     addLog("Change button clicked (logic to be implemented).");
@@ -57,13 +52,12 @@ changeBalanceBtn.addEventListener('click', function() {
 
 addLog("System initialized. Welcome!");
 
-
-
 const convertBtn = document.getElementById('convert-btn');
 const inputBalance = document.getElementById('input-balance');
 const outputBalance = document.getElementById('output-balance');
 const inputCurrency = document.getElementById('input-currency');
-const USD_TO_THB_RATE = 35;
+
+const USD_TO_THB_RATE = 32.5;
 
 convertBtn.addEventListener('click', function() {
     const amount = Number(inputBalance.value);
